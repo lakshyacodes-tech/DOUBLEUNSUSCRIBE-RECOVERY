@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LAKSHYA OTP</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#f4f6fb;color:#0f172a;min-height:100vh;
+}
+.top{
+  position:sticky;top:0;z-index:30;background:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;border-bottom:1px solid #eef0f5;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.logo{
+  width:32px;height:32px;border-radius:50%;background:#0f172a;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;
+}
+.menu-btn{
+  width:36px;height:36px;border-radius:50%;border:1px solid #e5e7eb;background:#fff;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;
+}
+.wrap{max-width:480px;margin:0 auto;padding:16px;padding-bottom:40px}
+.card{
+  background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;
+  box-shadow:0 1px 3px rgba(15,23,42,.06);border:1px solid #eef0f5;
+}
+.user-row{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.avatar{
+  width:44px;height:44px;border-radius:50%;background:#7c3aed;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;
+}
+.user-row .name{font-weight:700;font-size:15px}
+.user-row .mail{font-size:12px;color:#64748b;margin-top:2px}
+.label{font-size:11px;letter-spacing:1px;color:#64748b;font-weight:600;margin-bottom:6px}
+.credits-num{font-size:40px;font-weight:800;line-height:1;margin:4px 0 14px}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{
+  border:none;border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;
+  cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+}
+.btn-primary{background:#2563eb;color:#fff}
+.btn-ghost{background:#f1f5f9;color:#334155}
+.btn-block{width:100%;justify-content:center;padding:14px;font-size:15px;border-radius:12px}
+.btn-disabled{background:#94a3b8;color:#fff;pointer-events:none}
+input,textarea{
+  width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:10px;
+  font-size:14px;outline:none;background:#f8fafc;margin-top:6px;
+}
+input:focus{border-color:#2563eb;background:#fff}
+.section-title{font-size:18px;font-weight:800;margin-bottom:4px}
+.section-sub{font-size:13px;color:#64748b;margin-bottom:16px;line-height:1.45}
+.pack{
+  border:2px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;
+  cursor:pointer;position:relative;background:#fff;transition:.15s;
+}
+.pack.active{border-color:#2563eb;background:#f0f7ff}
+.pack .tag{
+  position:absolute;top:-10px;left:14px;background:#2563eb;color:#fff;
+  font-size:10px;font-weight:700;padding:3px 10px;border-radius:8px;
+}
+.pack .p-name{font-weight:700;margin-bottom:8px}
+.pack .p-cred{font-size:22px;font-weight:800}
+.pack .p-cred span{font-size:13px;font-weight:500;color:#64748b}
+.pack .p-price{margin-top:8px;font-size:20px;font-weight:800}
+.pack .p-note{font-size:12px;color:#64748b;margin-top:6px}
+.pay-tabs{display:flex;gap:8px;margin-top:8px}
+.pay-tabs .btn{flex:1;justify-content:center}
+.qr-box{
+  text-align:center;background:#f8fafc;border-radius:14px;padding:16px;
+  border:1px solid #eef0f5;margin:12px 0;
+}
+.qr-box img{width:200px;height:auto;border-radius:10px;background:#f5e6c8}
+.upi-row{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;
+  padding:10px 14px;font-family:ui-monospace,monospace;font-size:13px;margin:10px 0;
+}
+.upi-row button{
+  border:none;background:#fff;border:1px solid #e2e8f0;border-radius:8px;
+  padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;
+}
+.bullets{font-size:13px;color:#475569;line-height:1.7;padding-left:18px;margin:10px 0}
+.upload{
+  border:2px dashed #cbd5e1;border-radius:12px;padding:28px 16px;text-align:center;
+  color:#64748b;font-size:13px;cursor:pointer;background:#f8fafc;margin-top:8px;
+}
+.upload.has{border-color:#22c55e;background:#f0fdf4;color:#166534}
+.hidden{display:none!important}
+.page{display:none}
+.page.active{display:block}
+.back{
+  border:none;background:none;color:#2563eb;font-size:14px;font-weight:600;
+  cursor:pointer;margin-bottom:12px;padding:0;
+}
+.msg{
+  background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:12px 14px;
+  font-size:13px;color:#1e40af;line-height:1.45;margin-top:10px;
+}
+.tg-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:#229ED9;color:#fff;text-decoration:none;border-radius:12px;
+  padding:14px;font-weight:700;font-size:14px;margin-top:10px;
+}
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:#0f172a;color:#fff;padding:10px 18px;border-radius:10px;
+  font-size:13px;z-index:99;display:none;white-space:nowrap;
+}
+.drawer{
+  position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:40;display:none;
+}
+.drawer.open{display:block}
+.drawer-panel{
+  position:absolute;right:0;top:0;bottom:0;width:260px;background:#fff;
+  padding:20px 16px;box-shadow:-4px 0 20px rgba(0,0,0,.1);
+}
+.drawer-panel a{
+  display:block;padding:12px;border-radius:10px;text-decoration:none;color:#0f172a;
+  font-weight:600;font-size:14px;margin-bottom:4px;
+}
+.drawer-panel a:hover{background:#f1f5f9}
+.ok-banner{
+  background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;
+  border-radius:12px;padding:14px;font-size:13px;line-height:1.5;margin-top:12px;
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="brand"><div class="logo">L</div> LAKSHYA OTP</div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</div>
+
+<div class="drawer" id="drawer" onclick="if(event.target===this)toggleMenu()">
+  <div class="drawer-panel">
+    <div style="font-weight:800;margin-bottom:16px">Menu</div>
+    <a href="#" onclick="go('dash');toggleMenu()">Dashboard</a>
+    <a href="#" onclick="go('buy');toggleMenu()">Buy Credits</a>
+    <a href="https://t.me/c4rderrr" target="_blank">Telegram Support</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- DASHBOARD -->
+  <div class="page active" id="dash">
+    <div class="card">
+      <div class="label">CREDITS</div>
+      <div class="credits-num" id="credNum">0</div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="go('buy')">+ Buy credits</button>
+        <button class="btn btn-ghost" onclick="toast('No history yet')">History</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span>🎁</span><strong>Have a promo code?</strong>
+      </div>
+      <div style="display:flex;gap:8px">
+        <input type="text" placeholder="ENTER CODE" id="promo" style="margin:0">
+        <button class="btn btn-ghost" onclick="redeemPromo()">Redeem</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div class="section-title" style="font-size:16px;margin:0">Send OTP</div>
+        <span style="font-size:18px">✉️</span>
+      </div>
+      <div class="section-sub" style="margin-bottom:10px">Enter the email to receive the Garena registration code.</div>
+      <input type="email" id="otpEmail" placeholder="target@example.com">
+      <button class="btn btn-block btn-primary" style="margin-top:12px" id="sendOtpBtn" onclick="sendOtp()">✈ Send OTP</button>
+      <div class="msg" id="otpMsg" style="display:none"></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span>🔔</span><strong>Messages</strong>
+      </div>
+      <div class="msg">
+        <strong>Need help?</strong><br>
+        Contact admin on Telegram for support or credit issues.
+      </div>
+      <a class="tg-btn" href="https://t.me/c4rderrr" target="_blank">Telegram — @c4rderrr</a>
+    </div>
+  </div>
+
+  <!-- BUY -->
+  <div class="page" id="buy">
+    <button class="back" onclick="go('dash')">← Back</button>
+    <div class="section-title">Buy Credits</div>
+    <div class="section-sub">Pay via UPI, upload the screenshot, and get credits after verification.</div>
+
+    <div class="pack active" id="pack1">
+      <div class="tag">Only Pack</div>
+      <div class="p-name">Double Unsubscribe Pack</div>
+      <div class="p-cred">1 <span>credit</span></div>
+      <div class="p-price">₹3,000</div>
+      <div class="p-note">1 credit required for double unsubscribe</div>
+    </div>
+
+    <div class="pay-tabs">
+      <button class="btn btn-primary">UPI (India)</button>
+      <button class="btn btn-ghost" onclick="toast('UPI only for now')">Binance / USDT</button>
+    </div>
+
+    <button class="btn btn-block btn-primary" style="margin-top:16px" onclick="go('pay')">Continue to Pay ₹3,000</button>
+  </div>
+
+  <!-- PAY -->
+  <div class="page" id="pay">
+    <button class="back" onclick="go('buy')">← Back</button>
+    <div class="card">
+      <div class="section-title" style="font-size:16px">Pay ₹3,000 via UPI</div>
+      <div class="qr-box">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAFoAQAAAABSnlx4AAACz0lEQVR4nO2b227bMBBEzxT6/1+ePuyFdIs8BJUa0mYSxzJ8HgYUMXvhSuYbP7++Ax/60D9OX6C4MgKDLAMywiBwE+vo3pW+AEOsKwIZy4rbIGwmYh3du9IX5FqTqy2D/trtQayj+y1oY7BitW1UXvPflXwIXbsakNJF/CX9pJJ3pS/oFXbYtSYvIaOmn1fyGXQGRMJMvvotdB3du9KzXcgvL5lhL88r+RhaIKR4R3ULZIWHa4TNpXRvSwvjUdRk8u1KvqveOfn3PXSUOXI5uSzZxDrLsiIz9GK6t6TTpPGobLKY9JSfVMqyju5d6fCMzEFGaIzKp/5jx986uremIx+xNS18e3YETR8/uYsuy1AmJg4DMWDbdiYtJ17eRceKp0dHM1aAJIRk5S1YTfeedOQj2S8Rygah3M1YVxhdSveWdNfzbSBEkOw6v2PmiZf30GXRQHVgrcgRbRxpotHzSj6Arn5JlpSeztHGRbULF9K9Kx15B8Ri18fpOor5CJcL6d6azqar1E0TK00lbf3kg7fSFgLnLnYV9UxHajr54B303PNuq1a/uRvkx09uoa+6kFUOMhISt6E/r+Rj6NjN0XW1q2WS+WFlhrHiS+nekh7TJi4XIadRPH/PyQdvoV9y7z7Xyc533oLsjD+s5GNoAbYYzhHLTVaYjDxlKd270paq8x19wfRyjLKyVH61lO4t6atGH2JOk0wKy1zip2vQdXRvTEcC6B7SjGJ+OrUfN2Mp3VvS0QKsKao/5qmyPzuwdXRvTI8D436NprjGx+PfN9BTf5Ax963e45kq6vjJfbTHiUOPw0rK04c88NHZ33fQ0/MNVoRHVQ7uMciW1rKO7jegY1l7/kHpLPKIoEvq3orOIaqsJOtqLi7HtP3JT/6dnp5vyNbJiKB5tEY/ILiQ7l3pi64j4wgtixvog4dpJn8d3bvSL49D/aiSQx/6fvo3Xu66XVPS6QwAAAAASUVORK5CYII=" alt="UPI QR">
+      </div>
+      <div class="upi-row">
+        <span id="upiId">lakshyachohariya@fam</span>
+        <button type="button" onclick="copyUpi()">Copy</button>
+      </div>
+      <a download="lakshya-upi-qr.png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAFoAQAAAABSnlx4AAACz0lEQVR4nO2b227bMBBEzxT6/1+ePuyFdIs8BJUa0mYSxzJ8HgYUMXvhSuYbP7++Ax/60D9OX6C4MgKDLAMywiBwE+vo3pW+AEOsKwIZy4rbIGwmYh3du9IX5FqTqy2D/trtQayj+y1oY7BitW1UXvPflXwIXbsakNJF/CX9pJJ3pS/oFXbYtSYvIaOmn1fyGXQGRMJMvvotdB3du9KzXcgvL5lhL88r+RhaIKR4R3ULZIWHa4TNpXRvSwvjUdRk8u1KvqveOfn3PXSUOXI5uSzZxDrLsiIz9GK6t6TTpPGobLKY9JSfVMqyju5d6fCMzEFGaIzKp/5jx986uremIx+xNS18e3YETR8/uYsuy1AmJg4DMWDbdiYtJ17eRceKp0dHM1aAJIRk5S1YTfeedOQj2S8Rygah3M1YVxhdSveWdNfzbSBEkOw6v2PmiZf30GXRQHVgrcgRbRxpotHzSj6Arn5JlpSeztHGRbULF9K9Kx15B8Ri18fpOor5CJcL6d6azqar1E0TK00lbf3kg7fSFgLnLnYV9UxHajr54B303PNuq1a/uRvkx09uoa+6kFUOMhISt6E/r+Rj6NjN0XW1q2WS+WFlhrHiS+nekh7TJi4XIadRPH/PyQdvoV9y7z7Xyc533oLsjD+s5GNoAbYYzhHLTVaYjDxlKd270paq8x19wfRyjLKyVH61lO4t6atGH2JOk0wKy1zip2vQdXRvTEcC6B7SjGJ+OrUfN2Mp3VvS0QKsKao/5qmyPzuwdXRvTI8D436NprjGx+PfN9BTf5Ax963e45kq6vjJfbTHiUOPw0rK04c88NHZ33fQ0/MNVoRHVQ7uMciW1rKO7jegY1l7/kHpLPKIoEvq3orOIaqsJOtqLi7HtP3JT/6dnp5vyNbJiKB5tEY/ILiQ7l3pi64j4wgtixvog4dpJn8d3bvSL49D/aiSQx/6fvo3Xu66XVPS6QwAAAAASUVORK5CYII=" class="btn btn-ghost btn-block" style="margin-bottom:8px;text-decoration:none">Download QR</a>
+      <ul class="bullets">
+        <li>Send the exact amount <strong>₹3,000</strong></li>
+        <li>Take a screenshot after payment</li>
+        <li>Upload it below and submit</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="font-size:16px">Submit for verification</div>
+      <label style="font-size:12px;color:#64748b;font-weight:600">UTR / Transaction ID (optional)</label>
+      <input type="text" id="utr" placeholder="e.g. 431290XXXXX">
+      <label style="font-size:12px;color:#64748b;font-weight:600;display:block;margin-top:12px">Payment screenshot *</label>
+      <div class="upload" id="upZone" onclick="document.getElementById('fileIn').click()">
+        <div style="font-size:22px;margin-bottom:6px">↑</div>
+        <div id="upText">Click to upload (PNG/JPG, up to 5MB)</div>
+      </div>
+      <input type="file" id="fileIn" accept="image/*" style="display:none" onchange="onFile(this)">
+      <button class="btn btn-block btn-primary" style="margin-top:14px" onclick="submitPay()">🛡 Submit for verification</button>
+      <p style="font-size:12px;color:#94a3b8;margin-top:10px;text-align:center">Credits will be added only after admin approval.</p>
+      <div class="ok-banner hidden" id="payOk">
+        Payment submitted. Send screenshot + UTR on Telegram for faster approval.<br>
+        <a href="https://t.me/c4rderrr" target="_blank" style="color:#065f46;font-weight:700">Open @c4rderrr</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* Promo codes — change / add yahan. key UPPERCASE */
+var PROMO_CODES = {
+  "LAKSHYA5": 5,
+  "WELCOME1": 1,
+  "OTP3": 3,
+  "C4RDERRR": 2
+};
+
+let credits = parseInt(localStorage.getItem('lakshya_credits')||'0',10);
+document.getElementById('credNum').textContent = credits;
+let hasFile = false;
+
+function getUsedPromos(){
+  try { return JSON.parse(localStorage.getItem('lakshya_used_promos')||'[]'); }
+  catch(e){ return []; }
+}
+function saveUsedPromos(list){
+  localStorage.setItem('lakshya_used_promos', JSON.stringify(list));
+}
+function redeemPromo(){
+  var el = document.getElementById('promo');
+  var raw = (el.value||'').trim().toUpperCase();
+  if(!raw){ toast('Enter promo code'); return; }
+  if(!PROMO_CODES[raw]){ toast('Invalid code'); return; }
+  var used = getUsedPromos();
+  if(used.indexOf(raw) !== -1){ toast('Code already used'); return; }
+  var add = PROMO_CODES[raw];
+  credits += add;
+  localStorage.setItem('lakshya_credits', String(credits));
+  document.getElementById('credNum').textContent = credits;
+  used.push(raw);
+  saveUsedPromos(used);
+  el.value = '';
+  toast('+' + add + ' credit' + (add>1?'s':'') + ' added');
+}
+
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function toggleMenu(){
+  document.getElementById('drawer').classList.toggle('open');
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.display='block';
+  setTimeout(()=>t.style.display='none',2200);
+}
+function copyUpi(){
+  navigator.clipboard.writeText('lakshyachohariya@fam');
+  toast('UPI ID copied');
+}
+function onFile(inp){
+  if(inp.files && inp.files[0]){
+    hasFile=true;
+    document.getElementById('upZone').classList.add('has');
+    document.getElementById('upText').textContent = inp.files[0].name;
+  }
+}
+function submitPay(){
+  if(!hasFile){ toast('Upload payment screenshot'); return; }
+  document.getElementById('payOk').classList.remove('hidden');
+  toast('Submitted — contact admin');
+}
+function sendOtp(){
+  const email=document.getElementById('otpEmail').value.trim();
+  if(!email || !email.includes('@')){ toast('Enter valid email'); return; }
+  if(credits < 1){
+    document.getElementById('otpMsg').style.display='block';
+    document.getElementById('otpMsg').innerHTML='Need <strong>1 credit</strong> to send OTP (double unsubscribe). <a href="#" onclick="go(\'buy\')">Buy credits</a>';
+    toast('Not enough credits');
+    return;
+  }
+  credits -= 1;
+  localStorage.setItem('lakshya_credits', String(credits));
+  document.getElementById('credNum').textContent = credits;
+  document.getElementById('otpMsg').style.display='block';
+  document.getElementById('otpMsg').textContent = 'OTP request queued for '+email+'. Admin will process shortly.';
+  toast('OTP request sent');
+}
+</script>
+</body>
+</html>
